@@ -10957,7 +10957,16 @@ section.resume-section .resume-section-content {
   width: 100%;
 }
 
+.hidden-scroll {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
 
+.show-scroll {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 @media (min-width: 768px) {
   section.resume-section {

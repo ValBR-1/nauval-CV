@@ -76,3 +76,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
     observer.observe(target);
 });
+
+const galleryItems = document.querySelectorAll('.hidden-scroll');
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show-scroll');
+        } 
+        else {
+            entry.target.classList.remove('show-scroll');
+        }
+    });
+}, {
+    threshold: 0.2 
+});
+
+galleryItems.forEach((item) => {
+    observer.observe(item);
+});
