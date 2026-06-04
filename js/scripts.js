@@ -31,67 +31,55 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
 
-});
 
-document.addEventListener('DOMContentLoaded', function () {
-    const target = document.querySelector('#typing-name');
+
+    //Type writter feature
+    const targetName = document.querySelector('#typing-name');
     let typedInstance = null;
-
-    function startTyping() {
-        if (typedInstance) return;
-
-        typedInstance = new Typed('#typing-name', {
-            strings: [
-                'Nauval <span class="text-primary">Abdi Rahman</span>'
-            ],
-            typeSpeed: 80,
-            showCursor: true,
-            cursorChar: '|',
-            contentType: 'html'
-        });
-    }
-
-    function stopTyping() {
-        if (typedInstance) {
-            typedInstance.destroy();
-            typedInstance = null;
-            target.innerHTML = '';
-        }
-    }
-
-    const observer = new IntersectionObserver(
-        (entries) => {
+    if (targetName) {
+        const typeObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    startTyping();
-                } else {
-                    stopTyping();
+                    if (!typedInstance) {
+                        typedInstance = new Typed('#typing-name', {
+                            strings: ['Nauval <span class="text-primary">Abdi Rahman</span>'],
+                            typeSpeed: 100,
+                            showCursor: true,
+                            cursorChar: '|',
+                            contentType: 'html',
+                        });
+                    }
+                }else{
+                    if (typedInstance) {
+                        typedInstance.destroy();
+                        typedInstance = null;
+                        targetName.innerHTML = '';
+                    }
                 }
             });
-        },
-        {
-            threshold: 0.1
-        }
-    );
+            },{
+                threshold: 0.3
+        });
+        typeObserver.observe(targetName);
+    }
 
-    observer.observe(target);
-});
+    //Scroll reveal feature
+    const galleryItems = document.querySelectorAll('.hidden-scroll');
 
-const galleryItems = document.querySelectorAll('.hidden-scroll');
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show-scroll');
-        } 
-        else {
-            entry.target.classList.remove('show-scroll');
-        }
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show-scroll');
+            } 
+            else {
+                entry.target.classList.remove('show-scroll');
+            }
+        });
+    }, {
+        threshold: 0.2 
     });
-}, {
-    threshold: 0.2 
-});
 
-galleryItems.forEach((item) => {
-    observer.observe(item);
+    galleryItems.forEach((item) => {
+        observer.observe(item);
+    });
 });
