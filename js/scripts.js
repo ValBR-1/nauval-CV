@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', event => {
 
 
 
-    //Type writter feature
+    //Type Writter Feature
     const targetName = document.querySelector('#typing-name');
     let typedInstance = null;
     if (targetName) {
@@ -58,12 +58,12 @@ window.addEventListener('DOMContentLoaded', event => {
                 }
             });
             },{
-                threshold: 0.3
+                threshold: 0.5
         });
         typeObserver.observe(targetName);
     }
 
-    //Scroll reveal feature
+    //Scroll Reveal Feature
     const galleryItems = document.querySelectorAll('.hidden-scroll');
 
     const observer = new IntersectionObserver((entries) => {
@@ -76,7 +76,7 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         });
     }, {
-        threshold: 0.2 
+        threshold: 0.8
     });
 
     galleryItems.forEach((item) => {
